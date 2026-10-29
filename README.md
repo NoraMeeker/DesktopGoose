@@ -24,7 +24,7 @@ Requires Windows. It runs on the built-in Windows PowerShell, so you don't need 
 |------|--------------|
 | Ctrl+Shift+G | Send the goose home (quit) |
 | Ctrl+Shift+O | Open settings |
-| Ctrl+Shift+F | Challenge the goose to a duel |
+| Ctrl+Shift+F | Challenge the goose to a duel (only if Knife is on in settings) |
 | Hold any mouse button | Make it let go of whatever it has |
 
 You can also right-click the tray icon to open settings or send the goose home.

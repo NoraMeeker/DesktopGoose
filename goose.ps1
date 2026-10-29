@@ -880,9 +880,10 @@ public class GooseForm : Form {
         SetState("duel", Rand(7, 11));
     }
 
-    // Challenge it any time with Ctrl+Shift+F, or by writing "duel" to command.txt in the settings folder
+    // Challenge it any time with Ctrl+Shift+F, or by writing "duel" to command.txt in the settings folder (needs Knife on)
     void Challenge() {
         if (state == "heist" || state == "windrag") return;
+        if (!cfg.Knife) { Honk("sad"); Say("No sword, no duel.", 1.5f); return; }
         if (sleeping) { sleeping = false; typingSince = clock.Elapsed.TotalSeconds; }
         if (carried != null) carried = null;
         StartDuel();
@@ -910,6 +911,7 @@ public class GooseForm : Form {
                     string c = File.ReadAllText(cmd).Trim().ToLower();
                     File.Delete(cmd);
                     if (c == "duel" || c == "fight") Challenge();
+                    else if ((c == "steal" || c == "chase") && cfg.StealCursor && state != "heist" && state != "windrag") { sleeping = false; carried = null; stepped = false; Honk("angry"); SetState("chase", 0); }
                     else if (c == "dance" && !sleeping && state != "heist" && state != "windrag") { carried = null; StartDance(); }
                     else if (c == "stab" && state != "heist" && state != "windrag") { sleeping = false; carried = null; StartStab(); }
                 }
